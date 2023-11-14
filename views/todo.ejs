@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>TODO APP</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="https://kit.fontawesome.com/f23508b92e.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="main" style="color: aliceblue;">
+            <h1>TODO APP</h1>
+        </div>
+        <form action="add-data" method="POST" id="form">
+            <div class="description" style="text-align: center;">
+                <h1>Description</h1>
+                <div class="div1">
+                    <input id="div" style="text-align:center;width: 60vw;height:40px ;font-size:medium;" ;="text" name="description" placeholder="Enter what do you need to do......."required>
+                </div>                
+                <br>
+                <br>
+            </div>
+            <div class="category">
+                <label for="category">Choose category:</label>                   
+                    <select name="category" id="category" style="width:200px;border: 3px solid;font-size: medium;">
+                        <option >Choose category</option>
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="office">Office</option>
+                        <option value="family">Family</option>
+                        <option value="friends">Friends</option> 
+                        <option value="Travel">Travel</option>                              
+                    </select>
+            </div>   
+            <div class="date">                       
+                <label style=" shape-margin: 200px;">Due date:</label> 
+                        <input type="date" style="border: 3px solid;"name="duedate" />
+                        <span class="validity"></span>                                        
+            </div> 
+            <div class="addtask">
+                 <button style="width:50%; background-color:black;color:aliceblue" id="button1"><h3><i class="fa-solid fa-cart-plus fa-beat"></i> AddTask</h3>  </button>
+            </div>                                                                
+        </form>
+        <form action="/delete-list" method="get">
+            <div class="remove">
+                <button style="width:50%; border: 3px solid;background-color: red;height:60px"type="submit" >
+                    <h3><i class="fa-solid fa-trash fa-beat-fade"></i> DeleteTask</h3></button>  
+            </div> 
+            <div class="data">                     
+                <table id="table" style="text-align:center">
+                    <thead style="border:1px solid">
+                        <tr>
+                            <th>CHECKED</th>
+                            <th>DESCRIPTION</th>
+                            <th>CATEGORY</th>
+                            <th>DUE DATE</th>
+                        </tr>                       
+                    </thead>
+                    <tbody>
+                        <% for(let i of data) { %>
+                            <tr>
+                                <td style="background-color: rgb(184, 222, 246);width: 3vw;"><input type="checkbox" name="<%=i._id %>"></td>
+                                <td style="width:8vw"><%=i.description %></td>
+                                <td style="width:8vw"><%=i.category %></td>
+                                <%if((i.duedate)==""){%><td style="width:20vw"><i class="fa-solid fa-hourglass-start fa-shake"></i>No-deadline</td>
+                                <% }else{%>
+                                   <td style="width:20vw"><i class="fa-solid fa-calendar"></i> <%=i.duedate %></i></td>
+                                   <% } %>  
+                           </tr> 
+                           <% } %>   
+                    </tbody>                                       
+                </table> 
+            </div>                                                                   
+        </form>      
+    </body>
+</html>
